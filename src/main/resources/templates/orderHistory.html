@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, admin-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header" th:replace="fragmentShop :: header"></header>
+
+<div class="container-fluid">
+    <div th:if="${size == 0}">No order</div>
+    <table class="table" th:if="${size > 0}">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Ngày đặt</th>
+            <th scope="col">Tổng tiền</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Action</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="order, iStat : ${orders}">
+            <th scope="row" th:text="${iStat.index + 1}">1</th>
+            <td th:text="${order.formatDate(order.createDate)}"></td>
+            <td th:text="${order.formatPrice(order.totalPrice)}"></td>
+            <td th:text="${order.status}"></td>
+
+            <td><a href="" th:href="@{/user/order/detail/{id}(id=${order.id})}" class="btn btn-success">Chi tiết</a></td>
+            <td><a href="" th:href="@{/user/order/delete/{id}(id=${order.id})}" th:disabled="${order.getStatus().equalsIgnoreCase('Chờ xác nhận')}" class="btn btn-danger">Hủy đơn</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragmentShop :: script"></div>
+
+</body>
+</html>

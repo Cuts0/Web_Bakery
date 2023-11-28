@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragmentShop :: head">
+</head>
+
+<body>
+
+<header class="main-header" th:replace="fragmentShop :: header"></header>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-sm-3">
+      <h4>Danh mục sản phẩm</h4>
+      <ul class="list-group">
+        <a th:href="@{/user/shop/1}"><li class="list-group-item text-dark font-weight-bold">Tất cả sản phẩm</li></a>
+        <a href="" th:each="category, iStat : ${categories}" th:href="@{/user/shop/{code}/{page}(code=${category.code}, page=1)}">
+          <li class="list-group-item text-dark font-weight-bold" th:text="${category.name}"></li>
+        </a>
+
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <div class="card" style="margin-top: 20px" th:each="product : ${products}">
+        <div class="row no-gutters" >
+          <div class="col-sm-5 d-flex justify-content-center">
+            <img class="" height="150px" width="150px" th:src="*{'data:image.jpeg;base64,' + product.thumbnail}" th:alt="${product.name}">
+          </div>
+          <div class="col-sm-7 d-flex justify-content-center">
+            <div class="card-body">
+              <h4 class="card-title" th:text="${product.name}" ></h4>
+              <h5><span th:text="${product.formatPrice()}"></span></h5>
+              <!--              <p th:text="${product.description}" >Description</p>-->
+              <a href="#" th:href="@{/user/shop/product-detail/{id}(id=${product.id})}" class="btn btn-primary">View Product</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 20px">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" th:if="${currentPage != 1}">
+              <a th:href="@{/user/shop/search-product/{page}(page=${currentPage - 1}, key=${key})}" class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(1,totalPages)}" th:classappend="${currentPage == i ? 'active':''}">
+              <a th:href="@{/user/shop/search-product/{page}(page=${i}, key=${key})}" class="page-link" href="#">
+                <span th:text="${i}"></span>
+              </a>
+            </li>
+            <li class="page-item" th:if="${currentPage != totalPages}">
+              <a th:href="@{/user/shop/search-product/{page}(page=${currentPage + 1}, key=${key})}" class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<footer th:replace="fragmentShop :: footer"></footer>-->
+<div th:replace="fragmentShop :: script"></div>
+
+</body>
+</html>

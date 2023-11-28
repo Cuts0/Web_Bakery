@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: header">
+</div>
+
+<div class="container">
+  <h2 class="text-center">Lịch sử giao dịch sản phẩm</h2>
+  <div th:if="${size == 0}">Không có dữ liệu</div>
+  <table class="table" th:if="${size > 0}">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Ngày mua</th>
+      <th scope="col">Tên sản phẩm</th>
+      <th scope="col">Đơn giá</th>
+      <th scope="col">Số lượng mua</th>
+      <th scope="col">Người mua</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="product, iStat : ${list}">
+      <th scope="row" th:text="${iStat.index + 1}">1</th>
+      <td th:text="${product.formatDate()}"></td>
+      <td th:text="${product.productName}"></td>
+      <td th:text="${product.formatPrice()}"></td>
+      <td th:text="${product.quantity}"></td>
+      <td th:text="${product.customerName}"></td>
+
+    </tr>
+    </tbody>
+<!--    <div>-->
+<!--      <strong>Tổng doanh thu:<span th:text="${totalRevenue}">100</span></strong>-->
+<!--    </div>-->
+  </table>
+</div>
+<div th:replace="fragments :: script"></div>
+</body>
+</html>

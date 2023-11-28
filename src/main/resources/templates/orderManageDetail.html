@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, admin-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="fragments :: header">
+</div>
+
+<main>
+    <div class="container">
+
+        <!--Section: Block Content-->
+        <section class="mt-5 mb-4">
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-8">
+
+                    <!-- Card -->
+                    <div class="card wish-list mb-4">
+                        <div class="card-body">
+
+                            <div class="row mb-4" th:each="item, iStat : ${order.getOrderDetails()}">
+                                <div class="col-md-5 col-lg-3 col-xl-3">
+                                    <div class="mb-3 mb-md-0">
+                                        <img class="img-fluid w-100"
+                                             th:src="*{'data:image.jpeg;base64,' + item.product.image}"
+                                             src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+                                             alt="Sample">
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-lg-9 col-xl-9">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h5 th:text="${item.product.name}">Donut</h5>
+                                                <p class="mb-3 text-uppercase small">Đơn giá: <span
+                                                        th:text="${item.formatPrice(item.price)}"></span></p>
+                                                <p class="mb-2 text-uppercase small">Số lượng:
+                                                    <input th:value="${item.quantity}" min="1" type="number"
+                                                           name="quantity" aria-label="Sizing example input"
+                                                           aria-describedby="inputGroup-sizing-sm"
+                                                           style="width: 40px;" readonly>
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="mt-5 d-flex justify-content-between align-items-center">
+                                            <p class="mb-0"><span>
+                                                <strong>Thành tiền:
+                                                    <span th:text="${item.formatPrice(item.price * item.quantity)}"> VND</span>
+                                                </strong></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+
+                            <!-- <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
+                                items to your cart does not mean booking them.</p> -->
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4">
+
+                    <!-- Card -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <!--                            <h5 class="mb-3">The total amount-->
+                            <!--                                <span ></span>-->
+                            <!--                            </h5>-->
+                            <form th:action="@{/admin/order/update/{id}(id=${order.id})}" method="post">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 mb-3">
+                                        <div>
+                                            <p>Địa chỉ nhận hàng:</p>
+                                            <p th:text="${order.customer.getFirstName()+' '+order.customer.getLastName() + ' ('+order.customer.getPhone()+')'}"></p>
+                                            <p th:text="${order.customer.address}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 mb-3">
+                                        Tổng tiền thanh toán:
+                                        <span><span th:text="${order.formatPrice(order.getTotalPrice())}"></span></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 mb-3">
+                                        Trạng thái:
+                                        <select id="newStatus" name="status" required>
+                                            <option selected th:text="${order.getStatus()}"></option>
+                                            <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                            <option value="Đã xác nhận">Đã xác nhận</option>
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 mb-3">
+                                        Khách hàng:
+                                        <span><span th:text="${order.getCustomer().getUsername()}"></span></span>
+                                    </li>
+                                </ul>
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn-primary">Cập nhật</button>
+                                    <button type="button" th:href="@{/admin/order/delete/{id}(id=${order.id})}" class="btn-danger">
+                                        Hủy đơn
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Block Content-->
+
+    </div>
+</main>
+<!--Main layout-->
+
+<div th:replace="fragments :: script"></div>
+
+</body>
+</html>

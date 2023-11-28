@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, admin-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+<header class="main-header" th:replace="fragmentShop :: header"></header>
+
+<div class="container mt-5">
+    <h1 class="font-weight-bold ml-5">Thông tin chi tiết</h1>
+    <div class="row">
+        <div class="col-sm-5 d-flex justify-content-center">
+            <img class="mt-5" height="300px" width="300px" src=""
+                 th:src="*{'data:image.jpeg;base64,' + product.thumbnail}" alt="">
+        </div>
+        <div class="col-sm-7 mt-5">
+            <h2 th:text="${product.name}"></h2>
+            <h5 th:text="${product.formatPrice()}"></h5>
+            <h4>Short Description:</h4>
+            <p th:text="${product.description}" style="font-family: 'Dosis', sans-serif"></p>
+            <a href="" th:href="@{/add-to-cart/{id}(id = ${product.id})}" class="btn btn-primary">Add to cart</a>
+        </div>
+    </div>
+</div>
+
+<!--<footer th:replace="fragmentShop :: footer"></footer>-->
+<div th:replace="fragmentShop :: script"></div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragmentShop :: head">
+<body>
+
+<header class="main-header" th:replace="fragmentShop :: header">
+</header>
+
+<div class="container">
+
+    <!--Section: Block Content-->
+    <section class="mt-5 mb-4">
+
+        <!--Grid row-->
+        <div class="row" th:object="${customer}">
+
+            <!--Grid column-->
+            <div class="col-lg-8 mb-4">
+
+                <!-- Card -->
+                <div class="card wish-list pb-1">
+                    <div class="card-body">
+
+                        <h5 class="mb-2">Billing details</h5>
+
+                        <!-- Grid row -->
+                        <div class="row">
+
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                        </div>
+                        <div class="md-form md-outline mt-2">
+                            <label for="firstName">First name: </label>
+                            <span th:text="${customer.firstName}" id="firstName"></span>
+                        </div>
+                        <!-- Grid row -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="lastName">Last name: </label>
+                            <span id="lastName" th:text="${customer.lastName}" ></span>
+                        </div>
+
+                        <!-- Address Part 1 -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form14">Address: </label>
+                            <span id="form14" th:text="${customer.address}" ></span>
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form18">Phone: </label>
+                            <span id="form18" th:text="${customer.phone}" ></span>
+                        </div>
+
+                        <!-- Email address -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form19">Email address: </label>
+                            <span id="form19" th:text="${customer.username}" ></span>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Card -->
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4">
+
+                <!-- Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <h5 class="mb-3">The total amount </h5>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 mb-3">
+                                Amount Payable
+                                <span th:text="${totalPriceItems}"></span>
+                            </li>
+                        </ul>
+
+                        <form action="" method="post" th:action="@{/user/checkout/place-order}" >
+                            <button type="submit"  class="btn btn-primary btn-block waves-effect waves-light">Place Order</button>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Card -->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </section>
+    <!--Section: Block Content-->
+
+
+</div>
+<div th:replace="fragmentShop :: script"></div>
+</body>
+</html>
