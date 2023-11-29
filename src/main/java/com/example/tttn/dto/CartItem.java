@@ -11,7 +11,7 @@ import java.util.Locale;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem extends BaseObjectDto<CartItem>{
+public class CartItem extends BaseObjectDto<CartItem> {
     private Long productId;
     private String productName;
     private Double price;
@@ -19,10 +19,10 @@ public class CartItem extends BaseObjectDto<CartItem>{
     private String image;
     private Integer quantity;
 
-    public CartItem(OrderDetail entity){
+    public CartItem(OrderDetail entity) {
         if (entity != null) {
             this.setId(entity.getId());
-            this.productId= entity.getProduct().getId();
+            this.productId = entity.getProduct().getId();
             this.productName = entity.getProduct().getName();
             this.price = entity.getPrice();
             this.totalPrice = entity.getPrice() * entity.getQuantity();
@@ -30,10 +30,12 @@ public class CartItem extends BaseObjectDto<CartItem>{
             this.quantity = entity.getQuantity();
         }
     }
-    public String formatTotalPrice(){
-        return NumberFormat.getCurrencyInstance(new Locale("vi","VN")).format(this.totalPrice);
+
+    public String formatTotalPrice() {
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(this.totalPrice);
     }
-    public String formatPrice(){
-        return NumberFormat.getCurrencyInstance(new Locale("vi","VN")).format(this.price);
+
+    public String formatPrice() {
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(this.price);
     }
 }

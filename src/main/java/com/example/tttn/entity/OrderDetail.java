@@ -21,7 +21,7 @@ public class OrderDetail extends BaseObject {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public String formatPrice(Double price){
+    public String formatPrice(Double price) {
         return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
     }
 }

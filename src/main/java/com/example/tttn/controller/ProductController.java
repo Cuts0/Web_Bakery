@@ -61,8 +61,9 @@ public class ProductController {
         model.addAttribute("categories", categoryService.getAll());
         return "productsAdd";
     }
+
     @GetMapping("/admin/statistics")
-    public String statistics(Model model){
+    public String statistics(Model model) {
         List<ProductRevenueDto> revenues = productService.getReveneuProduct();
         double totalRevenue = revenues.stream().mapToDouble(ProductRevenueDto::getTotalRevenue).sum();
         model.addAttribute("totalRevenue", NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(totalRevenue));
@@ -71,8 +72,9 @@ public class ProductController {
 
         return "revenueProduct";
     }
+
     @GetMapping("/admin/statistics/{id}")
-    public String dealProductHistory(@PathVariable("id")Long productId, Model model){
+    public String dealProductHistory(@PathVariable("id") Long productId, Model model) {
         List<ProductRevenueDetail> list = productService.getRevenueProductDetail(productId);
         model.addAttribute("size", list.size());
         model.addAttribute("list", list);

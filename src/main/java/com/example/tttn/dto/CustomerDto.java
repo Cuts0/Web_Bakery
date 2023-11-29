@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDto extends BaseObjectDto<CustomerDto>{
+public class CustomerDto extends BaseObjectDto<CustomerDto> {
     @Size(min = 2, max = 15, message = "First name should have 3-15 characters")
     private String firstName;
     @Size(min = 2, max = 15, message = "First name should have 3-15 characters")
@@ -20,8 +20,9 @@ public class CustomerDto extends BaseObjectDto<CustomerDto>{
     private String password;
     private String phone;
     private String address;
-    public CustomerDto(Users entity){
-        if (entity != null){
+
+    public CustomerDto(Users entity) {
+        if (entity != null) {
             this.setId(entity.getId());
             this.firstName = entity.getFirstName();
             this.lastName = entity.getLastName();

@@ -20,13 +20,14 @@ public class CustomerServiceImpl implements CustomerService {
     private UsersRepository usersRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public CustomerDto saveOrUpdate(CustomerDto dto) {
         Users customer = new Users();
-        if (dto.getId() != null){
+        if (dto.getId() != null) {
             customer = usersRepository.findUsersById(dto.getId());
             customer.setModifiedBy(SecurityContextHolder.getContext().getAuthentication().getName());
-        }else {
+        } else {
             customer = new Users();
             customer.setUsername(dto.getUsername());
             customer.setPassword(passwordEncoder.encode(dto.getPassword()));

@@ -14,12 +14,13 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class CustomUserDetails implements UserDetails{
+public class CustomUserDetails implements UserDetails {
     private Users user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : user.getRoles()){
+        for (Role role : user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;
@@ -53,6 +54,6 @@ public class CustomUserDetails implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true ;
+        return true;
     }
 }

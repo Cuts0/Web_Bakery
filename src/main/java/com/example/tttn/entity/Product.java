@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product extends BaseObject{
+public class Product extends BaseObject {
     @Column
     private String name;
     @Column

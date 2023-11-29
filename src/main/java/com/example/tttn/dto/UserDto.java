@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto extends BaseObjectDto<UserDto>{
+public class UserDto extends BaseObjectDto<UserDto> {
     @Size(min = 2, max = 15, message = "First name should have 3-15 characters")
     private String firstName;
     @Size(min = 2, max = 15, message = "First name should have 3-15 characters")
@@ -25,8 +25,9 @@ public class UserDto extends BaseObjectDto<UserDto>{
     private String address;
     private List<Long> roleIds;
     private List<String> roles = new ArrayList<>();
-    public UserDto(Users entity){
-        if (entity != null){
+
+    public UserDto(Users entity) {
+        if (entity != null) {
             this.setId(entity.getId());
             this.firstName = entity.getFirstName();
             this.lastName = entity.getLastName();
@@ -34,9 +35,9 @@ public class UserDto extends BaseObjectDto<UserDto>{
             this.password = entity.getPassword();
             this.phone = entity.getPhone();
             this.address = entity.getAddress();
-            if (entity.getRoles() != null){
+            if (entity.getRoles() != null) {
                 this.roleIds = new ArrayList<>();
-                for (Role role : entity.getRoles()){
+                for (Role role : entity.getRoles()) {
                     roleIds.add(role.getId());
                     roles.add(role.getName());
                 }

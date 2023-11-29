@@ -24,8 +24,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.tttn.dto.ProductDto(ed) from Product ed where ed.category.code = ?1")
     Page<ProductDto> getListPageProductsInCategory(Pageable pageable, String code);
+
     @Query("select new com.example.tttn.dto.ProductDto(ed) from Product ed where ed.name like %?1%")
     Page<ProductDto> getListPageSearchProductByName(Pageable pageable, String key);
+
     @Query("select new com.example.tttn.dto.ProductRevenueDto(p.id, p.name, sum(od.quantity * od.price)) from Product p, OrderDetail od, Order o " +
             "where p.id = od.product.id and o.id = od.orders.id and o.status = 'Đã xác nhận' " +
             "group by p.id " +

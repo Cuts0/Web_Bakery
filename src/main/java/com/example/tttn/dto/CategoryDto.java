@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 public class CategoryDto extends BaseObjectDto<CategoryDto> {
     private String name;
     private String code;
+
     public CategoryDto(Category entity) {
-        if(entity != null) {
+        if (entity != null) {
             this.setId(entity.getId());
             this.name = entity.getName();
             this.code = entity.getCode();

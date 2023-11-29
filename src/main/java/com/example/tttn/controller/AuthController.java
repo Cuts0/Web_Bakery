@@ -24,34 +24,37 @@ public class AuthController {
     private UsersRepository usersRepository;
 
     @GetMapping("/home")
-    public String home(){
+    public String home() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ADMIN"))){
+        if (auth.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ADMIN"))) {
             return "redirect:/admin/home";
-        }else if (auth.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("CUSTOMER"))) {
+        } else if (auth.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("CUSTOMER"))) {
             return "redirect:/user/home";
-        }else
+        } else
             return "404";
     }
+
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("/register")
-    public String register(Model model){
+    public String register(Model model) {
         model.addAttribute("customerDto", new CustomerDto());
         return "register";
     }
+
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("customerDto")CustomerDto customerDto,
+    public String register(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
                            BindingResult result,
                            Model model,
-                           RedirectAttributes redirectAttributes){
-        if (result.hasErrors()){
+                           RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
             model.addAttribute("customerDto", customerDto);
             return "register";
         }
-        if (usersRepository.existsByUsername(customerDto.getUsername())){
+        if (usersRepository.existsByUsername(customerDto.getUsername())) {
             model.addAttribute("customerDto", customerDto);
             model.addAttribute("failed", "Tài khoản đã được đăng ký!!!");
             return "register";

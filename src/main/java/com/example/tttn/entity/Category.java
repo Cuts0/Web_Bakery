@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categories")
 @Data
-public class Category extends BaseObject{
+public class Category extends BaseObject {
     @Column
     private String name;
     @Column

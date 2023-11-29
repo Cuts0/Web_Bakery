@@ -1,8 +1,6 @@
 package com.example.tttn.controller;
 
 import com.example.tttn.dto.ProductDto;
-import com.example.tttn.entity.Order;
-import com.example.tttn.entity.OrderDetail;
 import com.example.tttn.service.ProductService;
 import com.example.tttn.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +23,27 @@ public class CartController {
     private ShoppingCartService cartService;
 
     @GetMapping("/user/cart")
-    public String getCart(Model model){
+    public String getCart(Model model) {
         model.addAttribute("totalItems", cartService.totalItems());
         model.addAttribute("totalPriceItems", NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(cartService.totalPriceCartItems()));
         return "cart";
     }
+
     @GetMapping("add-to-cart/{id}")
-    public String addToCart(@PathVariable("id")Long productId, HttpSession session){
+    public String addToCart(@PathVariable("id") Long productId, HttpSession session) {
         ProductDto product = productService.getById(productId);
         cartService.addToCart(product, session);
         return "redirect:/user/cart";
     }
+
     @GetMapping("/user/cart/delete/{id}")
-    public String deleteItem(@PathVariable("id")Long id){
+    public String deleteItem(@PathVariable("id") Long id) {
         cartService.deleteItemsInCart(id);
         return "redirect:/user/cart";
     }
+
     @PostMapping("/user/cart/update/{id}")
-    public String updateItem(@PathVariable("id")Long id, @RequestParam("quantity")Integer quantity){
+    public String updateItem(@PathVariable("id") Long id, @RequestParam("quantity") Integer quantity) {
         cartService.updateCartItem(id, quantity);
         return "redirect:/user/cart";
     }

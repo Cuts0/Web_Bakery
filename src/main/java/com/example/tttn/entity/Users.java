@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class Users extends BaseObject{
+public class Users extends BaseObject {
     @Column(name = "username")
     private String username;
     @Column(name = "password")

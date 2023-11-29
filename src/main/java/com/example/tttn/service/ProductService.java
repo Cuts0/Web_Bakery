@@ -16,6 +16,7 @@ public interface ProductService {
     Page<ProductDto> pageProducts(int pageIndex);
 
     Page<ProductDto> pageProductsInCategory(int pageIndex, String code);
+
     Page<ProductDto> pageSearchProduct(int pageIndex, String key);
 
     ProductDto getById(Long id);
@@ -23,6 +24,8 @@ public interface ProductService {
     Object saveOrUpdate(ProductDto dto, MultipartFile file, String imageUpdate);
 
     void deleteById(Long id);
+
     List<ProductRevenueDto> getReveneuProduct();
+
     List<ProductRevenueDetail> getRevenueProductDetail(Long productId);
 }

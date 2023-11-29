@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -24,13 +23,14 @@ public class AdminServiceImpl implements AdminService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public UserDto saveOrUpdate(UserDto userDto) {
         Users users = new Users();
-        if (userDto.getId() != null){
+        if (userDto.getId() != null) {
             users = usersRepository.findUsersById(userDto.getId());
             users.setModifiedBy(SecurityContextHolder.getContext().getAuthentication().getName());
-        }else {
+        } else {
             users = new Users();
             users.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
         }
@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
         users.setPhone(userDto.getPhone());
         users.setAddress(userDto.getAddress());
         List<Role> roles = new ArrayList<>();
-        for (Long roleId : userDto.getRoleIds()){
+        for (Long roleId : userDto.getRoleIds()) {
             roles.add(roleRepository.findRoleById(roleId));
         }
         users.setRoles(roles);

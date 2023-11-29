@@ -11,7 +11,7 @@ import java.util.Locale;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto extends BaseObjectDto<ProductDto>{
+public class ProductDto extends BaseObjectDto<ProductDto> {
     private String code;
     private String name;
     private Long categoryId;
@@ -21,12 +21,12 @@ public class ProductDto extends BaseObjectDto<ProductDto>{
     private String description;
     private Integer quantity;
 
-    public String formatPrice(){
-        return NumberFormat.getCurrencyInstance(new Locale("vi","VN")).format(this.price);
+    public String formatPrice() {
+        return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(this.price);
     }
 
-    public ProductDto(Product product){
-        if (product != null){
+    public ProductDto(Product product) {
+        if (product != null) {
             this.setId(product.getId());
             this.name = product.getName();
             this.code = product.getCode();

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart extends BaseObjectDto<ShoppingCart>{
+public class ShoppingCart extends BaseObjectDto<ShoppingCart> {
     private Long userId;
     private String fullName;
     private String email;

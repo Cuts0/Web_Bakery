@@ -3,8 +3,6 @@ package com.example.tttn.controller;
 import com.example.tttn.dto.CategoryDto;
 import com.example.tttn.dto.CustomerDto;
 import com.example.tttn.dto.ProductDto;
-import com.example.tttn.dto.UserDto;
-import com.example.tttn.entity.Users;
 import com.example.tttn.repository.UsersRepository;
 import com.example.tttn.service.CategoryService;
 import com.example.tttn.service.CustomerService;
@@ -31,7 +29,7 @@ public class HomeController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value = {"/user/home","/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/home", "/"}, method = RequestMethod.GET)
     public String home(Model model, Principal principal, HttpSession session) {
         if (principal != null) {
             session.setAttribute("username", principal.getName());
@@ -100,7 +98,7 @@ public class HomeController {
         return "myAccount";
     }
 
-    @RequestMapping (value = "/user/update-my-account", method = {RequestMethod.GET,RequestMethod.PUT})
+    @RequestMapping(value = "/user/update-my-account", method = {RequestMethod.GET, RequestMethod.PUT})
     public String updateInfor(@ModelAttribute("customerDto") CustomerDto customerDto, RedirectAttributes redirectAttributes) {
         customerService.saveOrUpdate(customerDto);
         redirectAttributes.addFlashAttribute("success", "Update success!!!");

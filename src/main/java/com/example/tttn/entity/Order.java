@@ -21,7 +21,7 @@ public class Order extends BaseObject {
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 
-    public String formatPrice(Double price){
+    public String formatPrice(Double price) {
         return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
     }
 }

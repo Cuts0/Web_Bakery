@@ -9,10 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Override
     public List<CategoryDto> getAll() {
         return categoryRepository.getAll();
@@ -21,10 +23,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Object saveOrUpdate(CategoryDto dto) {
         Category category = new Category();
-        if(dto.getId() != null){
+        if (dto.getId() != null) {
             category = categoryRepository.findCategoryById(dto.getId());
             category.setModifiedBy(SecurityContextHolder.getContext().getAuthentication().getName());
-        }else {
+        } else {
             category = new Category();
             category.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
         }

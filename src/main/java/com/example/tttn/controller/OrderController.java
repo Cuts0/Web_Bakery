@@ -2,8 +2,6 @@ package com.example.tttn.controller;
 
 import com.example.tttn.dto.CustomerDto;
 import com.example.tttn.entity.Order;
-import com.example.tttn.entity.OrderDetail;
-import com.example.tttn.entity.Users;
 import com.example.tttn.service.CustomerService;
 import com.example.tttn.service.OrderService;
 import com.example.tttn.service.ShoppingCartService;
@@ -48,21 +46,24 @@ public class OrderController {
             return "redirect:/user/shop/1";
         }
     }
+
     @GetMapping("/user/order-history")
-    public String getOrder(Model model){
+    public String getOrder(Model model) {
         List<Order> orders = orderService.getAllOrder();
         model.addAttribute("orders", orders);
         model.addAttribute("size", orders.size());
         return "orderHistory";
     }
+
     @GetMapping("/user/order/detail/{id}")
-    public String getDetailOrder(@PathVariable("id")Long id, Model model){
+    public String getDetailOrder(@PathVariable("id") Long id, Model model) {
         Order order = orderService.getOrder(id);
         model.addAttribute("order", order);
         return "orderDetail";
     }
+
     @GetMapping("/user/order/delete/{id}")
-    public String cancelOrder(@PathVariable("id")Long orderId){
+    public String cancelOrder(@PathVariable("id") Long orderId) {
         orderService.deleteById(orderId);
         return "redirect:/user/order-history";
     }

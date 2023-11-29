@@ -1,7 +1,6 @@
 package com.example.tttn.controller;
 
 import com.example.tttn.dto.CategoryDto;
-import com.example.tttn.entity.Category;
 import com.example.tttn.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

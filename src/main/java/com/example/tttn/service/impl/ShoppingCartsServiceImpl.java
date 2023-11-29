@@ -1,20 +1,17 @@
 package com.example.tttn.service.impl;
 
-import com.example.tttn.dto.CartItem;
 import com.example.tttn.dto.ProductDto;
 import com.example.tttn.entity.OrderDetail;
 import com.example.tttn.entity.Product;
 import com.example.tttn.repository.OrderDetailRepository;
 import com.example.tttn.repository.ProductRepository;
 import com.example.tttn.service.ShoppingCartService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.stream.DoubleStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ShoppingCartsServiceImpl implements ShoppingCartService {
@@ -40,13 +37,13 @@ public class ShoppingCartsServiceImpl implements ShoppingCartService {
             } else {
                 map = (Map<Long, OrderDetail>) cart;
                 OrderDetail item = map.get(dto.getId());
-                if (item == null){
+                if (item == null) {
                     item = new OrderDetail();
                     item.setProduct(product);
                     item.setQuantity(1);
                     item.setPrice(product.getPrice());
                     map.put(dto.getId(), item);
-                }else {
+                } else {
                     item.setQuantity(item.getQuantity() + 1);
                 }
                 session.setAttribute("cart", map);
